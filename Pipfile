@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+nose2 = "*"
+
+[packages]
+quart = "*"
+quart-cors = "*"
+hypercorn = "*"
+quart-openapi = "*"
+pytest = "*"
+
+[requires]
+python_version = "3.9"

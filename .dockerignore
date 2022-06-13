@@ -1,0 +1,5 @@
+.env
+.gitignore
+Pipfile
+Pipfile.lock
+README.md
