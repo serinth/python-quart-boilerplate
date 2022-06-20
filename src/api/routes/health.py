@@ -1,10 +1,17 @@
-import asyncio
-from quart_openapi import PintBlueprint, Resource
+from dataclasses import dataclass
+from quart import Blueprint
+from quart_schema import validate_response
 
-blueprint = PintBlueprint('health', __name__)
+blueprint = Blueprint('health', __name__, url_prefix = '/health')
 
-@blueprint.route('/health')
-#@blueprint.doc 
-class Health(Resource):
-    async def get(self):
-        return {'status': 'OK'}
+@dataclass
+class Status:
+    status: str
+
+@blueprint.route('/', methods=['GET'])
+@validate_response(Status, 200)
+async def health():
+    '''
+    Static health endpoint that always returns a success message.
+    '''
+    return Status(status = 'OK'), 200

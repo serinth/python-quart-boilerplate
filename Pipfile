@@ -10,8 +10,8 @@ nose2 = "*"
 quart = "*"
 quart-cors = "*"
 hypercorn = "*"
-quart-openapi = "*"
 pytest = "*"
+quart-schema = "*"
 
 [requires]
 python_version = "3.9"

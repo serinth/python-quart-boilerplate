@@ -1,16 +1,14 @@
 import logging
-from quart import jsonify
-from quart_openapi import Pint, PintBlueprint
+from quart import jsonify, Quart
 from api.routes.health import blueprint as health_api
 from constants.http_responses import *
-
+from quart_schema import QuartSchema
 from quart_cors import cors
 from config.log import get_logging_handler
 
-def create_app(config):
-    blueprint = PintBlueprint('docs', __name__)
-    
-    app = Pint(__name__)
+def create_app(config): 
+    app = Quart(__name__)
+    QuartSchema(app, title = 'My API')
     cors(app) # TODO: restrict this
     
     # flask/quart uses upper case letters for config, override them here:
@@ -25,10 +23,7 @@ def create_app(config):
     cors(health_api)
 
     # app.register_blueprint(<new_api_route>, url_prefix='/api')
-    app.register_blueprint(health_api)
-    app.register_blueprint(blueprint)
-    
-    
+    app.register_blueprint(health_api)    
 
     @app.after_request
     def add_header(response):

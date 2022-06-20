@@ -12,7 +12,9 @@ curl localhost:8000/health
 Included Helm Chart for CI/CD.
 Default port is **8000** with hot reloading for DEV environment.
 
-Hit localhost:8000/openapi.json for the specification
+Hit http://localhost:8000/openapi.json for the specification or
+http://localhost:8000/docs for the Swagger UI or
+http://localhost:8000/redocs for the Redocs UI
 
 # Environment Variables
 |Variable|Description|Default|
