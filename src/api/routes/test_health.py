@@ -1,22 +1,19 @@
 import pytest
-from unittest import mock
-from config import create_app
+import pytest_asyncio
+from pytest_mock import MockerFixture
+from config import create_app, Config
 
-_app = None
-
-@mock.patch('config.factory.Config')
-def _setUp(mock_config):
-    global _app
-    mock_config.return_value = {}
-    app = create_app(mock_config)
-    app.app_context().push()
-    _app = app
+@pytest_asyncio.fixture
+async def app(mocker: MockerFixture):
+    config_mock = mocker.Mock(spec=Config)
+    app = create_app(config_mock)
+    await app.app_context().push()
+    return app
 
 
 @pytest.mark.asyncio
-async def test_returns_status_ok():
-    _setUp()
-    client = _app.test_client()
+async def test_returns_status_ok(app):
+    client = app.test_client()
     """Should return status OK and HTTP 200 when hitting health endpoint"""
     response = await client.get('/health', follow_redirects=True)
     r = await response.get_json()
