@@ -2,5 +2,5 @@ language: python
 python:
     - "3.9"
 install: 
-    - pip install -r src/requirements.txt
-script: nose2
+    - pip3 install -r src/requirements.txt
+script: pytest

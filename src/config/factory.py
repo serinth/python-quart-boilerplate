@@ -5,8 +5,12 @@ from constants.http_responses import *
 from quart_schema import QuartSchema
 from quart_cors import cors
 from config.log import get_logging_handler
+from config import Config
+from secure import Secure
 
-def create_app(config): 
+def create_app(config: Config): 
+    secure_headers = Secure()
+
     app = Quart(__name__)
     QuartSchema(app, title = 'My API')
     cors(app) # TODO: restrict this
@@ -19,14 +23,12 @@ def create_app(config):
 
     app.config.from_object(config)
 
-    #CORS needs to be applied per blueprint
-    cors(health_api)
-
     # app.register_blueprint(<new_api_route>, url_prefix='/api')
     app.register_blueprint(health_api)    
 
     @app.after_request
     def add_header(response):
+        secure_headers.framework.flask(response)
         return response
 
     @app.errorhandler(400)

@@ -24,7 +24,7 @@ http://localhost:8000/redocs for the Redocs UI
 # Running Tests
 
 ```bash
-pipenv run nose2
+pipenv run pytest
 ```
 
 ## Building the Docker image

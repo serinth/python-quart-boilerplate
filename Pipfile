@@ -4,14 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-nose2 = "*"
+pytest-asyncio = "*"
 
 [packages]
 quart = "*"
 quart-cors = "*"
 hypercorn = "*"
-pytest = "*"
 quart-schema = "*"
+secure = "*"
 
 [requires]
 python_version = "3.9"
