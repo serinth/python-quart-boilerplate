@@ -7,12 +7,14 @@ from quart_cors import cors
 from config.log import get_logging_handler
 from config import Config
 from secure import Secure
+from opentelemetry.instrumentation.asgi import OpenTelemetryMiddleware
 
 def create_app(config: Config): 
     secure_headers = Secure()
 
     app = Quart(__name__)
-    QuartSchema(app, title = 'My API')
+    QuartSchema(app)
+    app.asgi_app = OpenTelemetryMiddleware(app.asgi_app)
     cors(app) # TODO: restrict this
     
     # flask/quart uses upper case letters for config, override them here:

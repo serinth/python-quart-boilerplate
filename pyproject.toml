@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "python-quart-boilerplate"
+version = "0.1.0"
+description = "A Python microframework API template with batteries included."
+authors = ["Tony Truong <serinth@gmail.com>"]
+license = "See LICENSE"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+quart = "^0.19.6"
+quart-cors = "^0.7.0"
+hypercorn = "^0.17.3"
+quart-schema = "^0.20.0"
+secure = "^0.3.0"
+pydantic = "^2.9.2"
+opentelemetry-instrumentation-asgi = "^0.48b0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-mock = "^3.14.0"
+pytest-asyncio = "^0.24.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

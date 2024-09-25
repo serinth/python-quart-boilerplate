@@ -9,8 +9,8 @@ class Status:
     status: str
 
 @blueprint.route('/', methods=['GET'])
-@validate_response(Status, 200)
-async def health():
+@validate_response(model_class=Status, status_code=200)
+async def health() -> tuple[Status, int]:
     '''
     Static health endpoint that always returns a success message.
     '''

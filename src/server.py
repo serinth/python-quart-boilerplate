@@ -17,4 +17,4 @@ if __name__ == '__main__':
     
     setConfig(config)
     app = create_app(config)
-    asyncio.run(serve(app, Config()))
+    asyncio.run(main=serve(app, Config()), debug=config.debug)
