@@ -1,14 +1,16 @@
 import logging
 from quart import jsonify, Quart
 from api.routes.health import blueprint as health_api
-
 from constants.http_responses import *
 from quart_schema import QuartSchema
 from quart_cors import cors
 from config.logger import get_logging_handler
 from config import Config
 from secure import Secure
+from opentelemetry import trace
 from opentelemetry.instrumentation.asgi import OpenTelemetryMiddleware
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter
 
 def create_app(config: Config) -> Quart: 
     secure_headers = Secure()
@@ -18,6 +20,13 @@ def create_app(config: Config) -> Quart:
     app.asgi_app = OpenTelemetryMiddleware(app.asgi_app)
     cors(app) # TODO: restrict this
     
+    # Set up the tracer provider
+    if config.debug:
+        trace.set_tracer_provider(TracerProvider())
+        console_exporter = ConsoleSpanExporter()
+        trace.get_tracer_provider().add_span_processor(BatchSpanProcessor(console_exporter))
+
+
     # flask/quart uses upper case letters for config, override them here:
     app.config.update(
         DEBUG=config.debug,
