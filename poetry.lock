@@ -362,6 +362,22 @@ opentelemetry-util-http = "0.48b0"
 instruments = ["asgiref (>=3.0,<4.0)"]
 
 [[package]]
+name = "opentelemetry-sdk"
+version = "1.27.0"
+description = "OpenTelemetry Python SDK"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "opentelemetry_sdk-1.27.0-py3-none-any.whl", hash = "sha256:365f5e32f920faf0fd9e14fdfd92c086e317eaa5f860edba9cdc17a380d9197d"},
+    {file = "opentelemetry_sdk-1.27.0.tar.gz", hash = "sha256:d525017dea0ccce9ba4e0245100ec46ecdc043f2d7b8315d56b19aff0904fa6f"},
+]
+
+[package.dependencies]
+opentelemetry-api = "1.27.0"
+opentelemetry-semantic-conventions = "0.48b0"
+typing-extensions = ">=3.7.4"
+
+[[package]]
 name = "opentelemetry-semantic-conventions"
 version = "0.48b0"
 description = "OpenTelemetry Semantic Conventions"
@@ -848,4 +864,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "27350ac1b9c64132367e713ce16f8f667af32dc7ed0aabc85134427f8ab58f0e"
+content-hash = "d49de54f3d05231558b2de67beb2352572db6e8b54ea2bc17db535f8b34be29d"
