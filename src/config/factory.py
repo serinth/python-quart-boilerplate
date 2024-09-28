@@ -1,7 +1,6 @@
 import logging
 from quart import jsonify, Quart
 from api.routes.health import blueprint as health_api
-from api.routes.point_cloud import blueprint as point_cloud_api
 
 from constants.http_responses import *
 from quart_schema import QuartSchema
