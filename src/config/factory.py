@@ -1,15 +1,17 @@
 import logging
 from quart import jsonify, Quart
 from api.routes.health import blueprint as health_api
+from api.routes.point_cloud import blueprint as point_cloud_api
+
 from constants.http_responses import *
 from quart_schema import QuartSchema
 from quart_cors import cors
-from config.log import get_logging_handler
+from config.logger import get_logging_handler
 from config import Config
 from secure import Secure
 from opentelemetry.instrumentation.asgi import OpenTelemetryMiddleware
 
-def create_app(config: Config): 
+def create_app(config: Config) -> Quart: 
     secure_headers = Secure()
 
     app = Quart(__name__)
@@ -26,7 +28,7 @@ def create_app(config: Config):
     app.config.from_object(config)
 
     # app.register_blueprint(<new_api_route>, url_prefix='/api')
-    app.register_blueprint(health_api)    
+    app.register_blueprint(health_api)
 
     @app.after_request
     def add_header(response):
